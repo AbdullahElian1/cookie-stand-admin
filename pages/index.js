@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Main from '../components/Main'
+import Link from 'next/link'
+
 export default function Home() {
   return (
     <div className="">
@@ -12,14 +14,15 @@ export default function Home() {
       </Head>
       
       <Header title={'Cookie Stand Admin'}>
-        {/* <h1> Cookie Stand Admin </h1> */}
+        <Link href="Overviews" >
+          <a>Overview</a>
+        </Link>
       </Header>
       <Main>
 
       </Main>
      
       
-      <Footer></Footer>
     </div>
   )
 }
