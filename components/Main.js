@@ -33,9 +33,6 @@ export default function Main() {
     }
 
 
-    useEffect(() => {
-        sumtotals()
-    }, [store])
     
     const onCreate = ((event) => {
         event.preventDefault()
@@ -50,21 +47,28 @@ export default function Main() {
             owner:user.id
         }
         const hourlySales = storeCity.hourly_sales
-
+        
         const objectData = {
             location: event.target.location.value,
             hourlySales: hourlySales,
             sum: hourlySales.reduce((a, b) => a + b, 0)
             
-
+            
         }
-        setStore(store => [...store, objectData])
-
-        createResource(storeCity)
         
-
+        createResource(storeCity)
+        // setStore(resources)
+        // console.log(store);
+        
     })
+    useEffect(() => {
+        if (resources){
+         setStore( resources)
+        }
+        console.log(store);
 
+    }, [resources,store])
+    
     return (
         <>
             <Creatform onCreate={onCreate} />
