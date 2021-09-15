@@ -9,7 +9,6 @@ import { useAuth } from '../contexts/auth'
 
 export default function Main() {
     const { user, login, logout } = useAuth();
-
     const { resources, loading, createResource, deleteResource } = useResource();
 
     const data = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
@@ -19,12 +18,13 @@ export default function Main() {
 
     const sumtotals = () => {
         const sumtotal = []
+        console.log(store.length);
         for (let i = 0; i <= store.length - 1; i++) {
-            for (let j = 0; j <= store[i].hourlySales.length - 1; j++)
+            for (let j = 0; j <= store[i].hourly_sales.length - 1; j++)
                 if (sumtotal[j]) {
-                    sumtotal[j] += store[i].hourlySales[j]
+                    sumtotal[j] += store[i].hourly_sales[j]
                 } else {
-                    sumtotal.push(store[i].hourlySales[j])
+                    sumtotal.push(store[i].hourly_sales[j])
                 }
         }
         setTotal([sumtotal, sumtotal.reduce((a, b) => a + b, 0)])
@@ -60,19 +60,23 @@ export default function Main() {
         // setStore(resources)
         // console.log(store);
         
+        
     })
     useEffect(() => {
         if (resources){
+        
          setStore( resources)
         }
-        console.log(store);
+        sumtotals()
+        // console.log(store);
+        
 
     }, [resources,store])
     
     return (
         <>
             <Creatform onCreate={onCreate} />
-            {/* <ReportTable store={store} total={total} /> */}
+            <ReportTable store={store} total={total} />
             <Footer reports={store} />
         </>
     )
