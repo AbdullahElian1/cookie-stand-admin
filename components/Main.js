@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import Creatform from "./Creatform";
 import ReportTable from "./ReportTable";
 import Footer from "./Footer";
@@ -25,7 +25,12 @@ export default function Main() {
 
     }
     
+    
+    useEffect (()=>{
+        sumtotals()       
 
+
+    },[store])
     const onCreate =((event)=>{
         event.preventDefault()
         const storeCity={
@@ -44,8 +49,7 @@ export default function Main() {
             sum:hourlySales.reduce((a, b) => a + b, 0)
 
         }
-        setStore(store => [...store, objectData])
-        sumtotals()       
+        setStore(store => [...store, objectData])     
 
     })
     
