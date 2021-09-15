@@ -1,7 +1,7 @@
 import axios from 'axios'
 import useSWR from 'swr'
 
-export const apiUrl = "http://127.0.0.1:8000/api/token/";
+export const apiUrl = "http://127.0.0.1:8000/api/v1/cookies/";
 import { useAuth } from '../contexts/auth'
 
 export default function useResource() {

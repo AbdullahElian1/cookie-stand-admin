@@ -3,9 +3,13 @@ import Creatform from "./Creatform";
 import ReportTable from "./ReportTable";
 import Footer from "./Footer";
 import useResource from "../hocks/useResource";
+import { useAuth } from '../contexts/auth'
+
 
 
 export default function Main() {
+    const { user, login, logout } = useAuth();
+
     const { resources, loading, createResource, deleteResource } = useResource();
 
     const data = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
@@ -37,13 +41,16 @@ export default function Main() {
         event.preventDefault()
         const storeCity = {
             location: event.target.location.value,
+            hourly_sales: data.map(() => {
+                return Math.floor(Math.random() * parseInt(event.target.avg.value) * (parseInt(event.target.max.value) - parseInt(event.target.min.value) + 1) + parseInt(event.target.min.value))
+            }),
             minimum_customers_per_hour: event.target.min.value,
             maximum_customers_per_hour: event.target.max.value,
-            average_cookies_per_sale: event.target.avg.value
+            average_cookies_per_sale: event.target.avg.value,
+            owner:user.id
         }
-        const hourlySales = data.map(() => {
-            return Math.floor(Math.random() * parseInt(event.target.avg.value) * (parseInt(event.target.max.value) - parseInt(event.target.min.value) + 1) + parseInt(event.target.min.value))
-        })
+        const hourlySales = storeCity.hourly_sales
+
         const objectData = {
             location: event.target.location.value,
             hourlySales: hourlySales,
@@ -53,7 +60,7 @@ export default function Main() {
         }
         setStore(store => [...store, objectData])
 
-        // createResource(storeCity)
+        createResource(storeCity)
         
 
     })
