@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function ReportTable({store,total}){
+export default function ReportTable({delete1,store,total,message}){
 
     const data = ['Location','6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','Totals']
     const [totalByRow, setTotalByRow] = useState([])
@@ -47,8 +47,9 @@ export default function ReportTable({store,total}){
           </thead>
           <tbody>
             {store.map((item,idx) => (
+              
               <tr  key={`${idx}`} className={`bg-green-${idx % 2 ? 500:300}`}>
-                <td className="pl-2 border border-gray-700 ">{item.location}</td>
+                <td className="pl-2 border border-gray-700 ">{item.location}<button onClick={()=>delete1(item.id)} className="flex  bg-red-700">🗑</button></td>
                 {   
 
                     item.hourly_sales.map((hour,key)=>
@@ -68,8 +69,8 @@ export default function ReportTable({store,total}){
               </tr>
           </tbody>
         </table>:
-        <h2 className="text-center" >
-            No Cookie Stand Available
+        <h2 className="text-center text-4xl" >
+            {message}
         </h2>
 
         }

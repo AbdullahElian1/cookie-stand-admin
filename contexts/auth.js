@@ -26,6 +26,7 @@ export function AuthProvider(props) {
 
         const response = await axios.post("https://cookies-stand-api.herokuapp.com/api/token/", { username, password });
 
+        console.log(response);
         const decodedAccess = jwt.decode(response.data.access);
 
         const newState = {

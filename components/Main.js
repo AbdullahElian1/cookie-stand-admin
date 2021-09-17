@@ -14,6 +14,8 @@ export default function Main() {
     const data = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
     const [store, setStore] = useState([])
     const [total, setTotal] = useState([])
+    const [message, setMessage] = useState('')
+
 
 
     const sumtotals = () => {
@@ -55,7 +57,11 @@ export default function Main() {
             
             
         }
-        
+        event.target.location.value= null
+        event.target.min.value =null
+        event.target.max.value =null
+        event.target.avg.value= null
+
         createResource(storeCity)
         // setStore(resources)
         // console.log(store);
@@ -63,20 +69,34 @@ export default function Main() {
         
     })
     useEffect(() => {
-        if (resources){
+        if (!loading){
         
          setStore( resources)
+         sumtotals()
+         setMessage('')
         }
-        sumtotals()
+        else{
+            setMessage("data is loading")
+        }
+        console.log("resorces is " , resources);
+        console.log("LOdaing status", loading);
         // console.log(store);
         
 
-    }, [resources,store])
+    }, [resources])
+
+    useEffect(() => {
+       
+         sumtotals()
+       
+        
+
+    }, [store])
     
     return (
         <>
             <Creatform onCreate={onCreate} />
-            <ReportTable store={store} total={total} />
+            <ReportTable store={store} total={total} delete1={deleteResource} message={message}/>
             <Footer reports={store} />
         </>
     )
