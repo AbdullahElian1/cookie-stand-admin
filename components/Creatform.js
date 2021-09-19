@@ -1,5 +1,6 @@
 import React,{ useState } from "react";
 export default function Creatform(props) {
+    // const [form ,setForm]=useState('')
     
     return (
         <div>
@@ -14,18 +15,18 @@ export default function Creatform(props) {
                     <div >
                         <label for="min" className="pr-1">Minumum Customers Per Hour</label>
                         <br />
-                        <input type="text" name="min" id="min" className="" />
+                        <input type="number" name="min" id="min" className="" />
                     </div>
                     <div >
                         <label for="max" className="pr-1">maximum Customers per hour
  </label>
                         <br />
-                        <input type="text" name="max" id="max" className="" />
+                        <input type="number" name="max" id="max" className="" />
                     </div>
                     <div >
                         <label for="avg" className="pr-1">Average Cookies per Sale </label>
                         <br />
-                        <input type="text" name="avg" id="avg" className="" />
+                        <input type="number"  name="avg" id="avg" className="" />
                         
                     </div>
                     <div className="mx-3 my-1 font-semibold bg-green-500 rounded flex-grow ">
